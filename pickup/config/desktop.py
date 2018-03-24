@@ -6,8 +6,8 @@ def get_data():
 	return [
 		{
 			"module_name": "Pickup",
-			"color": "grey",
-			"icon": "octicon octicon-file-directory",
+			"color": "#CED941",
+			"icon": "octicon octicon-gift",
 			"type": "module",
 			"label": _("Pickup")
 		}

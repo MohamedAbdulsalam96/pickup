@@ -6,8 +6,8 @@ app_name = "pickup"
 app_title = "Pickup"
 app_publisher = "Britlog"
 app_description = "Click And Collect App"
-app_icon = "octicon octicon-file-directory"
-app_color = "grey"
+app_icon = "octicon octicon-gift"
+app_color = "#CED941"
 app_email = "info@britlog.com"
 app_license = "GNU General Public License"
 
@@ -89,6 +89,12 @@ app_license = "GNU General Public License"
 
 # Scheduled Tasks
 # ---------------
+
+scheduler_events = {
+	"daily": [
+		"pickup.pickup.doctype.pickup_point.pickup_point.create_pickup_slots"
+	]
+}
 
 # scheduler_events = {
 # 	"all": [

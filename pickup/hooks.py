@@ -24,6 +24,7 @@ app_license = "GNU General Public License"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
+page_js = {"pos" : "pickup/custom_scripts/pos.js"}
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}

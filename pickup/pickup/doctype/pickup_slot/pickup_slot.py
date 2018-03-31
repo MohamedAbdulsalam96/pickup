@@ -16,3 +16,14 @@ class PickupSlot(Document):
 					frappe.utils.format_datetime(frappe.utils.format_time(self.start_time), "HH:mm") + "-" + \
 					frappe.utils.format_datetime(frappe.utils.format_time(self.end_time), "HH:mm") + \
 					" - " + abbrev
+
+
+@frappe.whitelist(allow_guest=True)
+def get_items_from_sales_order(customer, pickup_slot):
+	return frappe.db.sql("""
+		select SOI.item_code, SOI.qty
+		from `tabSales Order` SO
+		inner join `tabSales Order Item` SOI on SO.name = SOI.parent
+		where SO.customer = %(customer)s and SO.pickup_slot = %(pickup_slot)s
+		order by SOI.idx""",
+		{"customer": customer, "pickup_slot": pickup_slot}, as_dict=True)

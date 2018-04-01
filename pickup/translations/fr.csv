@@ -1,0 +1,10 @@
+TODO,Pickup,Click and Collect
+TODO,Pickup Point,Point de Collecte
+TODO,Pickup Slot,Créneau de Collecte
+TODO,Preparation Time,Délai de préparation
+TODO,Only slots above order date + preparation time (in hours) will be proposed.,Seuls les créneaux postérieurs à la date de commande + délai de préparation (en heures) seront proposés.
+TODO,Automatic Slot Creation,Création de Créneau Automatique
+TODO,Rolling Day Period,Nombre de Jours Glissants
+TODO,Slots will be automatically created each night within a rolling day period.,Les créneaux seront créés automatiquement chaque nuit sur une période glissante.
+TODO,Automatically generated,Généré automatiquement
+TODO,Point Name,Nom du Point

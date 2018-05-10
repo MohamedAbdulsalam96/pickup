@@ -26,6 +26,8 @@ app_license = "GNU General Public License"
 # page_js = {"page" : "public/js/file.js"}
 page_js = {"pos" : "pickup/custom_scripts/pos.js"}
 
+# extend cart context
+extend_website_page_controller_context = {"erpnext.templates.pages.cart":"pickup.templates.pages.cart"}
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}

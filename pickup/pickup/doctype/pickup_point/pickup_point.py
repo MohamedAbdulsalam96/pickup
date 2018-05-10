@@ -7,10 +7,14 @@ import frappe
 from frappe.model.document import Document
 import datetime
 from frappe import _
+from frappe.contacts.address_and_contact import load_address_and_contact
 
 class PickupPoint(Document):
 	def on_update(self):
 		create_pickup_slots()
+
+	def onload(self):
+		load_address_and_contact(self)
 
 def create_pickup_slots():
 	"""
@@ -23,7 +27,7 @@ def create_pickup_slots():
 
 	pickup_points = frappe.db.sql("""select name, holiday_list, rolling_day_period
 			from `tabPickup Point`
-			where IFNULL(automatic_slot_creation,0) = 1 
+			where automatic_slot_creation = 1 and disabled = 0 
 			""", as_dict=True)
 
 	if pickup_points:

@@ -10,12 +10,12 @@ class PickupSlot(Document):
 
 	def autoname(self):
 
-		abbrev = frappe.get_value('Pickup Point', self.pickup_point, 'abbr')
+		abbrev = frappe.get_value('Pickup Point', self.pickup_point, 'abbr') or ''
 
 		self.name = frappe.utils.formatdate(self.date, "EEEE dd/MM/yyyy").capitalize() + " " + \
 					frappe.utils.format_datetime(frappe.utils.format_time(self.start_time), "HH:mm") + "-" + \
 					frappe.utils.format_datetime(frappe.utils.format_time(self.end_time), "HH:mm") + \
-					" - " + abbrev
+					abbrev
 
 
 @frappe.whitelist(allow_guest=True)

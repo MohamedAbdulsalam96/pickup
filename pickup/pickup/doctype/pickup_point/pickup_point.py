@@ -67,5 +67,5 @@ def create_pickup_slots():
 					"date": slot["date"],
 					"start_time": slot["start_time"],
 					"end_time": slot["end_time"],
-					"reference": _("Automatically generated")
+					"reference": _("Automatically created")
 				}).insert(ignore_permissions=True)

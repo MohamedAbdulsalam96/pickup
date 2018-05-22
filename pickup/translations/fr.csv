@@ -6,8 +6,8 @@ TODO,Unit : hour. Only slots above order date + preparation time appears in cart
 TODO,Automatic Slot Creation,Création de Créneau Automatique
 TODO,Rolling Day Period,Nombre de Jours Glissants
 TODO,Slots will be automatically created each night within a rolling day period.,Les créneaux seront créés automatiquement chaque nuit sur une période glissante.
-TODO,Automatically generated,Généré automatiquement
+TODO,Automatically created,Créé automatiquement
 TODO,Point Name,Nom du Point
 TODO,Pickup Manager,Responsable du Click and Collect
-TODO,Pickup Address,Adresse du point de collecte
+TODO,Pickup Address,Adresse du Point de Collecte
 TODO,Unique code to distinguish several pickup points,Code unique pour distinguer plusieurs points de collecte

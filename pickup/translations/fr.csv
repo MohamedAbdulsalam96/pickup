@@ -1,7 +1,7 @@
 TODO,Pickup,Click and Collect
-TODO,Pickup Point,Point de Collecte
-TODO,Pickup Slot,Créneau de Collecte
-TODO,Preparation Time,Délai de préparation
+TODO,Pickup Point,Point de Retrait
+TODO,Pickup Slot,Créneau de Retrait
+TODO,Preparation Time,Délai de Préparation
 TODO,Unit : hour. Only slots above order date + preparation time appears in cart.,Unité : heure. Seuls les créneaux postérieurs à la date de commande + délai de préparation apparaissent dans le panier.
 TODO,Automatic Slot Creation,Création de Créneau Automatique
 TODO,Rolling Day Period,Nombre de Jours Glissants
@@ -9,5 +9,5 @@ TODO,Slots will be automatically created each night within a rolling day period.
 TODO,Automatically created,Créé automatiquement
 TODO,Point Name,Nom du Point
 TODO,Pickup Manager,Responsable du Click and Collect
-TODO,Pickup Address,Adresse du Point de Collecte
-TODO,Unique code to distinguish several pickup points,Code unique pour distinguer plusieurs points de collecte
+TODO,Pickup Address,Adresse du Point de Retrait
+TODO,Unique code to distinguish several pickup points,Code unique pour distinguer plusieurs points de retrait

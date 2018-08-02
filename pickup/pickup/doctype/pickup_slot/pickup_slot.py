@@ -27,3 +27,15 @@ def get_items_from_sales_order(customer, pickup_slot):
 		where SO.customer = %(customer)s and SO.pickup_slot = %(pickup_slot)s
 		order by SOI.idx""",
 		{"customer": customer, "pickup_slot": pickup_slot}, as_dict=True)
+
+@frappe.whitelist(allow_guest=True)
+def get_sales_orders(pickup_slot):
+	orders = frappe.db.sql("""
+		select SO.name
+		from `tabSales Order` SO
+		where SO.Status != "Closed" and SO.pickup_slot = %(pickup_slot)s""",
+		{"pickup_slot": pickup_slot}, as_dict=True)
+
+	default_print_format = frappe.get_value('Property Setter', 'Sales Order-default_print_format', 'value') or 'Standard'
+
+	return [orders,default_print_format]

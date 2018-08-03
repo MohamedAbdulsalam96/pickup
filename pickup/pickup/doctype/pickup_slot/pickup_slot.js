@@ -31,6 +31,9 @@ frappe.ui.form.on("Pickup Slot", "export_sales_orders", function(frm,cdt,cdn) {
 
             });
             //console.log(orders_no);
+            if (!orders_no) {
+            	frappe.msgprint(__('No orders')); return;
+            }
 
             var print_format = r.message[1];
             //console.log(print_format);

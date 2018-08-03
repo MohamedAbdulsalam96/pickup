@@ -35,7 +35,7 @@ frappe.ui.form.on("Pickup Slot", "export_sales_orders", function(frm,cdt,cdn) {
             	frappe.msgprint(__('No orders')); return;
             }
 
-            var print_format = r.message[1];
+            var print_format = encodeURIComponent(r.message[1]);
             //console.log(print_format);
 
             var w = window.open('/api/method/frappe.utils.print_format.download_multi_pdf?doctype=Sales%20Order&name=%5B'+orders_no+'%5D&format='+print_format+'&no_letterhead=1');

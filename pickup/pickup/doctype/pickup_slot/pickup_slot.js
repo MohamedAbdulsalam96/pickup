@@ -35,7 +35,10 @@ frappe.ui.form.on("Pickup Slot", "export_sales_orders", function(frm,cdt,cdn) {
             var print_format = r.message[1];
             //console.log(print_format);
 
-            window.open('/api/method/frappe.utils.print_format.download_multi_pdf?doctype=Sales%20Order&name=%5B'+orders_no+'%5D&format='+print_format+'&no_letterhead=1');
+            var w = window.open('/api/method/frappe.utils.print_format.download_multi_pdf?doctype=Sales%20Order&name=%5B'+orders_no+'%5D&format='+print_format+'&no_letterhead=1');
+        	if (!w) {
+				frappe.msgprint(__('Please enable pop-ups')); return;
+			}
         }
     });
 

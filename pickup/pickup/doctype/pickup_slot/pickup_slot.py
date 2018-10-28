@@ -21,7 +21,7 @@ class PickupSlot(Document):
 @frappe.whitelist(allow_guest=True)
 def get_items_from_sales_order(customer, pickup_slot):
 	return frappe.db.sql("""
-		select SOI.item_code, SOI.qty
+		select SOI.item_code, SOI.qty, SOI.rate, SOI.uom
 		from `tabSales Order` SO
 		inner join `tabSales Order Item` SOI on SO.name = SOI.parent
 		where SO.status in ('To Deliver and Bill', 'To Deliver') and SO.customer = %(customer)s and SO.pickup_slot = %(pickup_slot)s

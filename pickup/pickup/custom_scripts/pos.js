@@ -32,9 +32,13 @@ erpnext.pos.PointOfSale = erpnext.pos.PointOfSale.extend({
 						if (row.qty != 1) {
 							me.update_qty(row.item_code, row.qty);
 						}
+						me.child.uom = row.uom;
+						me.set_item_details(row.item_code, "rate", row.rate);
+						me.update_value();
 					})
 				}
 			})
+//			$(".get-orders-btn").prop("disabled",true);
 		})
 	},
 })

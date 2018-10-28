@@ -20,13 +20,22 @@ class PickupSlot(Document):
 
 @frappe.whitelist(allow_guest=True)
 def get_items_from_sales_order(customer, pickup_slot):
-	return frappe.db.sql("""
+	items = frappe.db.sql("""
 		select SOI.item_code, SOI.qty, SOI.rate, SOI.uom
 		from `tabSales Order` SO
 		inner join `tabSales Order Item` SOI on SO.name = SOI.parent
 		where SO.status in ('To Deliver and Bill', 'To Deliver') and SO.customer = %(customer)s and SO.pickup_slot = %(pickup_slot)s
 		order by SOI.idx""",
 		{"customer": customer, "pickup_slot": pickup_slot}, as_dict=True)
+
+	# Close the order(s)
+	frappe.db.sql("""
+		update `tabSales Order` set status = "Closed"
+		where status in ('To Deliver and Bill', 'To Deliver') and customer = %(customer)s and pickup_slot = %(pickup_slot)s
+		""", {"customer": customer, "pickup_slot": pickup_slot})
+	frappe.db.commit()
+	
+	return items
 
 @frappe.whitelist(allow_guest=True)
 def get_sales_orders(pickup_slot):

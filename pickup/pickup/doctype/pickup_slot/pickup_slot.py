@@ -43,7 +43,7 @@ def get_sales_orders(pickup_slot):
 	orders = frappe.db.sql("""
 		select SO.name
 		from `tabSales Order` SO
-		where SO.Status != "Closed" and SO.pickup_slot = %(pickup_slot)s""",
+		where SO.Status not in ("Cancelled","Closed") and SO.pickup_slot = %(pickup_slot)s""",
 		{"pickup_slot": pickup_slot}, as_dict=True)
 
 	default_print_format = frappe.get_value('Property Setter', 'Sales Order-default_print_format', 'value') or 'Standard'

@@ -89,6 +89,11 @@ extend_website_page_controller_context = {"erpnext.templates.pages.cart":"pickup
 # 		"on_trash": "method"
 #	}
 # }
+doc_events = {
+     "Sales Order": {
+         "before_insert": "pickup.pickup.doctype.pickup_slot.pickup_slot.set_delivery_date"
+     }
+}
 
 # Scheduled Tasks
 # ---------------

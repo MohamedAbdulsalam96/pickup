@@ -49,3 +49,9 @@ def get_sales_orders(pickup_slot):
 	default_print_format = frappe.get_value('Property Setter', 'Sales Order-default_print_format', 'value') or 'Standard'
 
 	return [orders,default_print_format]
+
+def set_delivery_date(doc, method):
+	if doc.order_type == "Shopping Cart":
+		doc.delivery_date = frappe.get_value('Pickup Slot', doc.pickup_slot, 'date') or ''
+		for item in doc.items:
+			item.delivery_date = doc.delivery_date

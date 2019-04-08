@@ -1,0 +1,8 @@
+{
+    "pickup/js/pos_extension.min.js": [
+        "pickup/custom_scripts/pos.js",
+        "public/js/controllers/taxes_and_totals.js",
+        "public/js/payment/payments.js",
+        "public/js/payment/pos_payment.html"
+    ]
+}

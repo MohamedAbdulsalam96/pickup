@@ -90,9 +90,13 @@ extend_website_page_controller_context = {"erpnext.templates.pages.cart":"pickup
 #	}
 # }
 doc_events = {
-     "Sales Order": {
-         "before_insert": "pickup.pickup.doctype.pickup_slot.pickup_slot.set_delivery_date"
-     }
+    "Sales Order": {
+        "before_insert": "pickup.pickup.doctype.pickup_slot.pickup_slot.set_delivery_date"
+    },
+	"Sales Invoice": {
+		"before_insert": "pickup.pickup.custom_classes.taxes_and_totals.taxes_and_totals_override",
+		"before_submit": "pickup.pickup.custom_classes.sales_invoice.sales_invoice_override"
+    }
 }
 
 # Scheduled Tasks

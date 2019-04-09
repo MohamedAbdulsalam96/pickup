@@ -23,9 +23,9 @@ erpnext.payments.prototype.get_customer_balance = function(customer) {
 
 			var balance = flt(r.message);
 			if (balance > 0)
-				$(me.$body).find('#customer-balance-label').text(__("Balance (Receivable)"));
+				$(me.$body).find('#customer-balance-label').text(__("Solde (Dû)"));
 			else
-				$(me.$body).find('#customer-balance-label').text(__("Balance (Payable)"));
+				$(me.$body).find('#customer-balance-label').text(__("Solde (Avoir)"));
 
 			$(me.$body).find('#customer-balance').text(format_currency(balance, me.frm.doc.currency)).val(balance);
 		}

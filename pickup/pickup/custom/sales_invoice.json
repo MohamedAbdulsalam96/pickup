@@ -12,7 +12,7 @@
    "columns": 0, 
    "creation": "2019-04-01 23:46:08.946085", 
    "default": null, 
-   "depends_on": null, 
+   "depends_on": "is_pos",
    "description": null, 
    "docstatus": 0, 
    "dt": "Sales Invoice", 

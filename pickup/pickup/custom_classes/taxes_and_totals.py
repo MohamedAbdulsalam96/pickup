@@ -10,24 +10,24 @@ def calculate_change_amount(self):
 	self.doc.base_change_amount = 0.0
 
 	if self.doc.doctype == "Sales Invoice" \
-			and self.doc.paid_amount > (self.doc.grand_total + self.doc.balance_amount) and not self.doc.is_return \
+			and self.doc.paid_amount > (self.doc.grand_total + flt(self.doc.balance_amount)) and not self.doc.is_return \
 			and any([d.type == "Cash" for d in self.doc.payments]):
 		grand_total = self.doc.rounded_total or self.doc.grand_total
 		base_grand_total = self.doc.base_rounded_total or self.doc.base_grand_total
 
 		self.doc.change_amount = flt(self.doc.paid_amount - grand_total +
 									 self.doc.write_off_amount
-									 - self.doc.balance_amount, self.doc.precision("change_amount"))
+									 - flt(self.doc.balance_amount), self.doc.precision("change_amount"))
 
 		self.doc.base_change_amount = flt(self.doc.base_paid_amount - base_grand_total +
 										  self.doc.base_write_off_amount
-										  - self.doc.balance_amount, self.doc.precision("base_change_amount"))
+										  - flt(self.doc.balance_amount), self.doc.precision("base_change_amount"))
 
 def calculate_write_off_amount(self):
 	if flt(self.doc.change_amount) > 0:
 		self.doc.write_off_amount = flt(self.doc.grand_total - self.doc.paid_amount
 										+ self.doc.change_amount
-										+ self.doc.balance_amount, self.doc.precision("write_off_amount"))
+										+ flt(self.doc.balance_amount), self.doc.precision("write_off_amount"))
 		self.doc.base_write_off_amount = flt(self.doc.write_off_amount * self.doc.conversion_rate,
 											 self.doc.precision("base_write_off_amount"))
 

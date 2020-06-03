@@ -21,6 +21,8 @@ app_license = "GNU General Public License"
 # include js, css files in header of web template
 # web_include_css = "/assets/pickup/css/pickup.css"
 # web_include_js = "/assets/pickup/js/pickup.js"
+web_include_css = "/assets/pickup/css/website.css"
+web_include_js = "/assets/pickup/js/shopping_cart.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
@@ -33,6 +35,16 @@ extend_website_page_controller_context = {"erpnext.templates.pages.cart":"pickup
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+
+
+# on_session_creation = "pickup.templates.pages.cart.set_pickup_slot"
+# on_logout = "pickup.templates.pages.cart.clear_pickup_slot"
+
+
+# Override ItemGroup context
+from pickup.custom_classes.item_group import item_group_override
+item_group_override()
+
 
 # Home Pages
 # ----------

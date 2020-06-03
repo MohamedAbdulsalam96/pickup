@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 import frappe
+from frappe.utils import cint
 from frappe.contacts.doctype.address.address import get_address_display
 from erpnext.shopping_cart.cart import _get_cart_quotation
 
@@ -14,11 +15,13 @@ def get_context(context):
 
 def get_pickup_slots():
 	return frappe.db.sql("""
-			select PS.name, PS.pickup_point, DL.parent AS address_name
+			select PS.name, PS.pickup_point, DL.parent AS address_name, 
+				IFNULL(PS.practical_information,'') AS practical_information
 			from `tabPickup Slot` PS
 			inner join `tabPickup Point` PP on PS.pickup_point = PP.name
 			inner join `tabDynamic Link` DL on PP.name = DL.link_name and DL.link_doctype = 'Pickup Point'
-			where DATE_ADD(NOW(), INTERVAL PP.preparation_time HOUR) < TIMESTAMP(PS.date,PS.start_time) 
+			where PS.show_in_website = 1
+				and DATE_ADD(NOW(), INTERVAL PP.preparation_time HOUR) < TIMESTAMP(PS.date,PS.start_time)
 			order by PS.date ASC, PS.start_time ASC""",as_dict=True)
 
 def get_pickup_addresses(doctype=None, txt=None, filters=None, limit_start=0, limit_page_length=20,
@@ -36,8 +39,27 @@ def get_pickup_addresses(doctype=None, txt=None, filters=None, limit_start=0, li
 
 	return out
 
+@frappe.whitelist(allow_guest=True)
+def set_pickup_slot(slot_name, cart_count):
+
+	# delete actual quotation because items depend on slot
+	if cart_count > 0:
+		quotation = _get_cart_quotation()
+		quotation.delete()
+		frappe.local.cookie_manager.set_cookie("cart_count", 0)
+
+	# set cookie for website
+	if cint(frappe.db.get_singles_value("Shopping Cart Settings", "enabled")):
+		if hasattr(frappe.local, "cookie_manager"):
+			frappe.local.cookie_manager.set_cookie("pickup_slot", slot_name)
+
+	return True
+
+def clear_pickup_slot():
+	frappe.local.cookie_manager.delete_cookie("pickup_slot")
+
 @frappe.whitelist()
-def update_pickup_slot(slot_name, address_name):
+def update_quotation_pickup_slot(slot_name, address_name):
 
 	quotation = _get_cart_quotation()
 

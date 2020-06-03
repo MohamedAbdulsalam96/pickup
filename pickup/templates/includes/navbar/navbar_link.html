@@ -1,0 +1,36 @@
+<li data-label='{{ page.label }}' {% if page.child_items %} class="dropdown dropdown-submenu"{% endif %}>
+	<a {% if not page.child_items -%} onclick="addSlotURL(this);" href="{{ (page.url or '')|abs_url }}"  {%- endif %}
+		{% if page.child_items %} class="dropdown-toggle" onclick="return false;" data-toggle="dropdown"{% endif %}
+		{{ page.target or ''}}>
+	{{ page.label }}
+	{%- if page.child_items -%}
+		<span class="caret"></span>
+	</a>
+		<ul class="dropdown-menu" role="menu">
+		{%- for child in page.child_items -%}
+			<li data-label='{{ child.label }}'>
+				<a {% if child.indent %} style="padding-left: {{((child.indent|int)+1)*15 }}px"{% endif %}
+				   onclick="addSlotURL(this);" href="{{ child.url | abs_url }}" {{ child.target or '' }}>{{ child.label }}</a>
+			</li>
+		{%- endfor -%}
+		</ul>
+	{%- else -%}
+	</a>
+	{%- endif -%}
+</li>
+
+<script>
+function addSlotURL(element)
+{
+    $(element).attr('href', function() {
+    	var pickup_slot = frappe.get_cookie("pickup_slot")
+
+		if (typeof pickup_slot === 'undefined') {
+			var loc = new URL(this.href);
+			return "/creneau?redirect-to=" + loc.pathname;
+		} else {
+			return this.href + '?creneau=' + pickup_slot;
+        }
+    });
+}
+</script>

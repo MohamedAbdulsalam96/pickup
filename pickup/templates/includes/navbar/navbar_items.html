@@ -1,0 +1,36 @@
+{% if top_bar_items -%}
+<ul class="nav navbar-nav navbar-left">
+	{%- for page in top_bar_items -%}
+		{% if not page.parent_label and not page.right -%}
+			{% include "templates/includes/navbar/navbar_link.html" %}
+		{%- endif -%}
+	{%- endfor %}
+</ul>
+{%- endif %}
+<ul class="nav navbar-nav navbar-right">
+	{% if shopping_cart_enabled %}
+		<li class="shopping-cart hidden">
+			<div class="cart-icon">
+				<span class="fa fa-map-marker fa-2x" style="vertical-align: middle;color: #e75012;"></span>
+				<a href="/creneau" style="padding-right: 20px;text-decoration:none;">
+					<span class="pickup-wrapper" id="pickup-slot"></span>
+				</a>
+				<a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
+					<span class="fa fa-shopping-basket fa-2x" style="vertical-align: middle;"></span>
+					<span class="badge-wrapper" id="cart-count"></span>
+				</a>
+				<div id="cart-overlay" class="dropdown-menu shopping-cart-menu"></div>
+			</div>
+		 </li>
+	{% endif %}
+	{%- for page in top_bar_items -%}
+		{% if not page.parent_label and page.right -%}
+			{% include "templates/includes/navbar/navbar_link.html" %}
+		{%- endif -%}
+	{%- endfor %}
+	{% if not only_static %}
+		{% block navbar_right_extension %}{% endblock %}
+	{% endif %}
+	{% include "templates/includes/navbar/navbar_search.html" %}
+	{% include "templates/includes/navbar/navbar_login.html" %}
+</ul>

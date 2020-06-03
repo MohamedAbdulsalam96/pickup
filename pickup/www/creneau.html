@@ -1,0 +1,50 @@
+{% extends "templates/web.html" %}
+
+{% block title %} {{_("Créneau")}} {% endblock %}
+
+{% block header %}<h1>{{_("Pick a slot")}}</h1>{% endblock %}
+
+{% block page_content %}
+
+<br>
+<div class="row">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-10">
+		<table id="tab_slots" style="width:100%;">
+			<tr>
+				<th bgcolor="#E5F2C8" style="padding: 5px;border: 0px solid black;">Créneau</th>
+				<th bgcolor="#E5F2C8" style="padding: 5px;border: 0px solid black;text-align: center;">Point de retrait</th>
+				<th bgcolor="#E5F2C8" style="padding: 5px;border: 0px solid black;text-align: center;">Information Pratique</th>
+				<th bgcolor="#E5F2C8" style="padding: 5px;border: 0px solid black;text-align: center;"></th>
+			</tr>
+			<tr><td colspan="4"><br></td></tr>
+			{% for slot in pickup_slots %}
+				<tr>
+					<td style="color: #e75012;font-weight: bold;">{{ slot.name }}</td>
+					<td style="text-align: center;"><b>{{ slot.pickup_point }}</b><p class="text-muted">{{ slot.pickup_address }}</p></td>
+					<td style="text-align: center;">{{ slot.practical_information }}</td>
+					<td style="text-align: center;"><input class="btn btn-primary" type="button"
+						style="font-size: 16px;padding: 10px;background: #e75012;border: none;" id="{{ slot.name }}"
+						value="Choisir" onclick="change_pickup_slot(this.id,'{{ slot.address_name }}');"></td>
+				</tr>
+				<tr><td colspan="4"><hr></td></tr>
+			{% endfor %}
+
+		</table>
+	</div>
+	<div class="col-sm-1"></div>
+</div>
+
+<script>
+var msgprint_alert = function(txt) {
+	if(txt) $("#contact-alert").html(txt).toggle(true);
+}
+</script>
+
+{% endblock %}
+
+{% block style %}
+<style>
+
+</style>
+{% endblock %}

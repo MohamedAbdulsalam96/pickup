@@ -1,0 +1,100 @@
+{% extends "templates/web.html" %}
+
+{% block header %}<h1>{{ title }}</h1>{% endblock %}
+
+{#
+<!--{% block breadcrumbs %}-->
+ <!--<div class="page-breadcrumbs" data-html-block="breadcrumbs">-->
+ 	<!--<ul class="breadcrumb">-->
+ 		<!--<li>-->
+ 			<!--<span class="fa fa-angle-left"></span>-->
+ 			<!--<a href="/me">{{ _("My Account") }}</a>-->
+ 		<!--</li>-->
+ 	<!--</ul>-->
+ <!--</div>-->
+<!--{% endblock %}-->
+#}
+
+{% block page_content %}
+<div class="item-group-content" itemscope itemtype="http://schema.org/Product">
+	<div>
+		{% if slideshow %}<!-- slideshow -->
+		{% include "templates/includes/slideshow.html" %}
+		{% endif %}
+		{% if description %}<!-- description -->
+		<div itemprop="description">{{ description or ""}}</div>
+		{% endif %}
+	</div>
+	<div>
+		{% if items %}
+		<div id="search-list" {% if not products_as_list -%} class="row" {%- endif %}>
+			{% for i in range(0, page_length) %}
+				{% if items[i] %}
+					{{ items[i] }}
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="text-center item-group-nav-buttons">
+			{% if frappe.form_dict.start|int > 0 %}
+			<a class="btn btn-default" href="/{{ pathname }}?start={{ frappe.form_dict.start|int - page_length }}&creneau={{ frappe.form_dict.creneau }}">{{ _("Prev") }}</a>
+			{% endif %}
+			{% if items|length > page_length %}
+			<a class="btn btn-default" href="/{{ pathname }}?start={{ frappe.form_dict.start|int + page_length }}&creneau={{ frappe.form_dict.creneau }}">{{ _("Next") }}</a>
+			{% elif frappe.form_dict.start|int > 0 %}
+			<a class="btn btn-default" href="/{{ pathname }}?start=0&creneau={{ frappe.form_dict.creneau }}">{{ _("Début") }}</a>
+			{% endif %}
+		</div>
+		{% else %}
+			<div class="text-muted">{{ _("No items listed") }}.</div>
+		{% endif %}
+	</div>
+</div>
+<script>
+frappe.ready(function() {
+
+	$(".product-item").on('click', '.number-spinner button', function () {
+
+		var btn = $(this),
+			input = btn.closest('.number-spinner').find('input'),
+			oldValue = input.val().trim(),
+			newVal = 0;
+
+		if (btn.attr('data-dir') == 'up') {
+			newVal = parseInt(oldValue) + 1;
+		} else if (btn.attr('data-dir') == 'dwn')  {
+			if (parseInt(oldValue) > 1) {
+				newVal = parseInt(oldValue) - 1;
+			}
+			else {
+				newVal = parseInt(oldValue);
+			}
+		}
+		input.val(newVal);
+	});
+
+	$(".item-add-to-cart button").on("click", function() {
+		frappe.provide('erpnext.shopping_cart');
+
+		var btn = $(this),
+			input = btn.closest('.number-spinner').find('input'),
+			oldValue = input.val().trim(),
+			newVal = 0;
+
+		var item_code = input.attr("data-item-code");
+		var newVal = input.val();
+
+		erpnext.shopping_cart.update_cart({
+			item_code: item_code,
+			qty: newVal,
+			callback: function(r) {
+				if(!r.exc) {
+
+				}
+			},
+			btn: this,
+		});
+	});
+
+});
+</script>
+{% endblock %}

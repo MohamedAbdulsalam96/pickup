@@ -11,7 +11,7 @@ TODO,Point Name,Nom du Point
 TODO,Pickup Manager,Responsable du Click and Collect
 TODO,Pickup Address,Adresse du Point de Retrait
 TODO,Unique code to distinguish several pickup points,Code unique pour distinguer plusieurs points de retrait
-TODO,Pick a slot,Choisissez un créneau
+TODO,Pick a slot,Choisissez un créneau de retrait
 TODO,Export Sales Orders,Export des Commandes
 TODO,Print or download sales orders of this slot,Imprimer ou télécharger les commandes de ce créneau
 TODO,No orders,Pas de commandes
@@ -19,3 +19,4 @@ TODO,Balance (Receivable),Solde (Dû)
 TODO,Balance (Payable),Solde (Avoir)
 TODO,Balance Amount,Régularisation
 TODO,Confirmation Email Sent,E-mail de Confirmation Envoyé
+TODO,HTML formatting accepted,Mise en forme HTML acceptée

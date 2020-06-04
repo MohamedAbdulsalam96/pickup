@@ -21,6 +21,16 @@ def get_product_list(search=None, start=0, limit=12, pickup_slot=None):
 	# only search if product group is shown in website
 	child_groups = ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups("Produits")])
 
+	pickup_groups = frappe.db.sql("""select item_group from `tabPickup Slot Group` where parent = %s""",
+								  pickup_slot, as_dict=True)
+
+	pickup_child_groups = ""
+	for pickup_group in pickup_groups:
+		if pickup_child_groups != "":
+			pickup_child_groups += ", "
+		pickup_child_groups += ", ".join(
+			['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(pickup_group.item_group)])
+
 	# base query
 	query = """select I.name, I.item_name, I.item_code, I.route, I.image, I.website_image, I.thumbnail, I.item_group,
 			I.description, I.web_long_description as website_description, I.is_stock_item,
@@ -33,11 +43,11 @@ def get_product_list(search=None, start=0, limit=12, pickup_slot=None):
 			and (I.end_of_life is null or I.end_of_life='0000-00-00' or I.end_of_life > %(today)s)
 			and (I.item_group in ({child_groups})
 			or I.name in (select parent from `tabWebsite Item Group` where item_group in ({child_groups})))
-			and (I.item_group in (select item_group from `tabPickup Slot Group` where parent = "{pickup_slot}")
+			and (I.item_group in ({pickup_child_groups})
 			or I.name in (select item_code from `tabPickup Slot Item` where parent = "{pickup_slot}")
 			or (not exists (select * from `tabPickup Slot Group` where parent = "{pickup_slot}")
 			and not exists (select * from `tabPickup Slot Item` where parent = "{pickup_slot}")))
-			""".format(child_groups=child_groups, pickup_slot=pickup_slot)
+			""".format(child_groups=child_groups, pickup_child_groups=pickup_child_groups, pickup_slot=pickup_slot)
 
 	# search term condition
 	if search:

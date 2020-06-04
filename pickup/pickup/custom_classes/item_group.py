@@ -17,11 +17,14 @@ def get_product_list_for_group(product_group=None, start=0, limit=10, search=Non
 	pickup_groups = frappe.db.sql("""select item_group from `tabPickup Slot Group` where parent = %s""",
 		pickup_slot, as_dict=True)
 
-	pickup_child_groups = ""
-	for pickup_group in pickup_groups:
-		if pickup_child_groups != "":
-			pickup_child_groups += ", "
-		pickup_child_groups += ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(pickup_group.item_group)])
+	if pickup_groups:
+		pickup_child_groups = ""
+		for pickup_group in pickup_groups:
+			if pickup_child_groups != "":
+				pickup_child_groups += ", "
+			pickup_child_groups += ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(pickup_group.item_group)])
+	else:
+		pickup_child_groups = '""'
 
 	# base query
 	query = """select I.name, I.item_name, I.item_code, I.route, I.image, I.website_image, I.thumbnail, I.item_group,
@@ -41,7 +44,7 @@ def get_product_list_for_group(product_group=None, start=0, limit=10, search=Non
 			or (not exists (select * from `tabPickup Slot Group` where parent = "{pickup_slot}")
 			and not exists (select * from `tabPickup Slot Item` where parent = "{pickup_slot}")))
 			""".format(child_groups=child_groups, pickup_child_groups=pickup_child_groups, pickup_slot=pickup_slot)
-
+	print(query)
 	# search term condition
 	if search:
 		query += """ and (I.web_long_description like %(search)s

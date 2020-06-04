@@ -44,7 +44,7 @@ def get_product_list_for_group(product_group=None, start=0, limit=10, search=Non
 			or (not exists (select * from `tabPickup Slot Group` where parent = "{pickup_slot}")
 			and not exists (select * from `tabPickup Slot Item` where parent = "{pickup_slot}")))
 			""".format(child_groups=child_groups, pickup_child_groups=pickup_child_groups, pickup_slot=pickup_slot)
-	print(query)
+
 	# search term condition
 	if search:
 		query += """ and (I.web_long_description like %(search)s

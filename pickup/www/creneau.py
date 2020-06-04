@@ -8,6 +8,8 @@ import frappe
 from pickup.templates.pages.cart import get_pickup_slots
 from frappe.contacts.doctype.address.address import get_address_display
 
+no_cache = 1
+
 def get_context(context):
 	context.update({
 		"pickup_slots": get_pickup_slots_with_address()

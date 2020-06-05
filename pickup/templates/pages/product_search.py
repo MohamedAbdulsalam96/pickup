@@ -22,14 +22,16 @@ def get_product_list(search=None, start=0, limit=12, pickup_slot=None):
 	child_groups = ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups("Produits")])
 
 	pickup_groups = frappe.db.sql("""select item_group from `tabPickup Slot Group` where parent = %s""",
-								  pickup_slot, as_dict=True)
+		pickup_slot, as_dict=True)
 
-	pickup_child_groups = ""
-	for pickup_group in pickup_groups:
-		if pickup_child_groups != "":
-			pickup_child_groups += ", "
-		pickup_child_groups += ", ".join(
-			['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(pickup_group.item_group)])
+	if pickup_groups:
+		pickup_child_groups = ""
+		for pickup_group in pickup_groups:
+			if pickup_child_groups != "":
+				pickup_child_groups += ", "
+			pickup_child_groups += ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(pickup_group.item_group)])
+	else:
+		pickup_child_groups = '""'
 
 	# base query
 	query = """select I.name, I.item_name, I.item_code, I.route, I.image, I.website_image, I.thumbnail, I.item_group,

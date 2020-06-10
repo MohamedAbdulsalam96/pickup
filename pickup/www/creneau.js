@@ -46,7 +46,7 @@ var change_pickup_slot = function(slot, address) {
 					//redirect if category is specified
 					var redirect_to = location.search.split('redirect-to=')[1]
 					if (redirect_to) {
-						window.location.href = redirect_to;
+						window.location.href = redirect_to + '?creneau=' + slot;
 						return false;
 					}
 

@@ -14,15 +14,27 @@ def get_product_list_for_group(product_group=None, start=0, limit=10, search=Non
 
 	child_groups = ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(product_group)])
 
-	pickup_groups = frappe.db.sql("""select item_group from `tabPickup Slot Group` where parent = %s""",
+	# define pickup_child_groups based on pickup slot settings
+	included_groups = frappe.db.sql("""select item_group from `tabPickup Slot Group` where excluded_group = 0 and parent = %s""",
+		pickup_slot, as_dict=True)
+	excluded_groups = frappe.db.sql("""select item_group from `tabPickup Slot Group` where excluded_group = 1 and parent = %s""",
 		pickup_slot, as_dict=True)
 
-	if pickup_groups:
-		pickup_child_groups = ""
-		for pickup_group in pickup_groups:
-			if pickup_child_groups != "":
-				pickup_child_groups += ", "
-			pickup_child_groups += ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(pickup_group.item_group)])
+	excluded_child_groups = []
+	if excluded_groups:
+		for excluded_group in excluded_groups:
+			for group in get_child_groups(excluded_group.item_group):
+				excluded_child_groups.append(group[0])
+
+	if included_groups:
+		included_child_groups = []
+		for included_group in included_groups:
+			for group in get_child_groups(included_group.item_group):
+				if group[0] not in excluded_child_groups and group[0] not in included_child_groups:
+					included_child_groups.append(group[0])
+
+		pickup_child_groups = ", ".join(['"' + frappe.db.escape(i) + '"' for i in included_child_groups])
+
 	else:
 		pickup_child_groups = '""'
 
@@ -40,9 +52,8 @@ def get_product_list_for_group(product_group=None, start=0, limit=10, search=Non
 			and (I.item_group in ({child_groups})
 			or I.name in (select parent from `tabWebsite Item Group` where item_group in ({child_groups})))
 			and (I.item_group in ({pickup_child_groups})
-			or I.name in (select item_code from `tabPickup Slot Item` where parent = "{pickup_slot}")
-			or (not exists (select * from `tabPickup Slot Group` where parent = "{pickup_slot}")
-			and not exists (select * from `tabPickup Slot Item` where parent = "{pickup_slot}")))
+			or I.name in (select item_code from `tabPickup Slot Item` where excluded_item = 0 and parent = "{pickup_slot}"))
+			and I.name not in (select item_code from `tabPickup Slot Item` where excluded_item = 1 and parent = "{pickup_slot}")
 			""".format(child_groups=child_groups, pickup_child_groups=pickup_child_groups, pickup_slot=pickup_slot)
 
 	# search term condition

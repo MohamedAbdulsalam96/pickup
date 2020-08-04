@@ -37,23 +37,25 @@ var change_pickup_slot = function(slot, address) {
 		},
 		callback: function(r) {
 			if(r.message) {
-					//console.log(r.message);
-					$("[id='"+slot+"']").prop("disabled",true);
+				//console.log(r.message);
+				$("[id='"+slot+"']").prop("disabled",true);
 
-					//update navbar
-					shopping_cart.set_cart_count();
+				//update navbar
+				shopping_cart.set_cart_count();
 
-					//redirect if category is specified
-					var redirect_to = location.search.split('redirect-to=')[1]
-					if (redirect_to) {
-						window.location.href = redirect_to + '?creneau=' + slot;
-						return false;
-					}
-
+				//redirect if category is specified
+				var redirect_to = location.search.split('redirect-to=')[1]
+				if (redirect_to) {
+					window.location.href = redirect_to + '?creneau=' + slot;
 				}
-				if(r.exc) {
-					frappe.msgprint(r.exc);
+				else {
+					window.location.href = '/produits?creneau=' + slot;
 				}
+				return false;
+			}
+			if(r.exc) {
+				frappe.msgprint(r.exc);
+			}
 		}
 	});
 }

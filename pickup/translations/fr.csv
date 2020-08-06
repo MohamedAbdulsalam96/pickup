@@ -1,6 +1,7 @@
 TODO,Pickup,Click and Collect
 TODO,Pickup Point,Point de Retrait
 TODO,Pickup Slot,Créneau de Retrait
+TODO,Pickup Date,Date de Retrait
 TODO,Preparation Time,Délai de Préparation
 TODO,Unit : hour. Only slots above order date + preparation time appears in cart.,Unité : heure. Seuls les créneaux postérieurs à la date de commande + délai de préparation apparaissent dans le panier.
 TODO,Automatic Slot Creation,Création de Créneau Automatique

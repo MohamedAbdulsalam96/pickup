@@ -26,7 +26,9 @@ web_include_js = "/assets/pickup/js/shopping_cart.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
-page_js = {"pos" : "public/js/pos_extension.min.js"}
+page_js = {
+	"pos" : "public/js/assets/pos_extension.min.js"
+}
 
 # extend cart context
 extend_website_page_controller_context = {"erpnext.templates.pages.cart":"pickup.templates.pages.cart"}

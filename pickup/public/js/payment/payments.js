@@ -33,6 +33,15 @@ erpnext.payments.prototype.get_customer_balance = function(customer) {
 }
 
 // override functions
+erpnext.payments.prototype.set_payment_primary_action = function(){
+	var me = this;
+
+	this.dialog.set_primary_action(__("Submit"), function() {
+		me.dialog.hide();
+		me.submit_invoice();
+	})
+}
+
 erpnext.payments.prototype.show_payment_details = function(){
 	var me = this;
 	var multimode_payments = $(this.$body).find('.multimode-payments').empty();

@@ -44,12 +44,12 @@ var change_pickup_slot = function(slot, address) {
 				shopping_cart.set_cart_count();
 
 				//redirect if category is specified
-				var redirect_to = location.search.split('redirect-to=')[1]
+				var redirect_to = decodeURIComponent(location.search.split('redirect-to=')[1]);
 				if (redirect_to) {
-					window.location.href = redirect_to + '?creneau=' + slot;
+					window.location.href = redirect_to + '?creneau=' + encodeURIComponent(slot);
 				}
 				else {
-					window.location.href = '/produits?creneau=' + slot;
+					window.location.href = '/produits?creneau=' + encodeURIComponent(slot);
 				}
 				return false;
 			}

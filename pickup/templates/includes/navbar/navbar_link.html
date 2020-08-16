@@ -27,9 +27,9 @@ function addSlotURL(element)
 
 		if (typeof pickup_slot === 'undefined') {
 			var loc = new URL(this.href);
-			return "/creneau?redirect-to=" + loc.pathname;
+			return "/creneau?redirect-to=" + encodeURIComponent(loc.pathname);
 		} else {
-			return this.href + '?creneau=' + pickup_slot;
+			return this.href + '?creneau=' + encodeURIComponent(pickup_slot);
         }
     });
 }

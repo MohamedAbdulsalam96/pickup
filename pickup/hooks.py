@@ -27,7 +27,7 @@ web_include_js = "/assets/pickup/js/shopping_cart.js"
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 page_js = {
-	"pos" : "public/js/assets/pos_extension.min.js"
+	"pos" : "public/js/assets/pos_extension.js"
 }
 
 # extend cart context

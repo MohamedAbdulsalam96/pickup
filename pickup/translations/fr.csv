@@ -1,25 +1,26 @@
-TODO,Pickup,Click and Collect
-TODO,Pickup Point,Point de Retrait
-TODO,Pickup Slot,Créneau de Retrait
-TODO,Pickup Date,Date de Retrait
-TODO,Preparation Time,Délai de Préparation
-TODO,Unit : hour. Only slots above order date + preparation time appears in cart.,Unité : heure. Seuls les créneaux postérieurs à la date de commande + délai de préparation apparaissent dans le panier.
-TODO,Automatic Slot Creation,Création de Créneau Automatique
-TODO,Rolling Day Period,Nombre de Jours Glissants
-TODO,Slots will be automatically created each night within a rolling day period.,Les créneaux seront créés automatiquement chaque nuit sur une période glissante.
-TODO,Automatically created,Créé automatiquement
-TODO,Point Name,Nom du Point
-TODO,Pickup Manager,Responsable du Click and Collect
-TODO,Pickup Address,Adresse du Point de Retrait
-TODO,Unique code to distinguish several pickup points,Code unique pour distinguer plusieurs points de retrait
-TODO,Pick a slot,Choisissez un créneau de retrait
-TODO,Export Sales Orders,Export des Commandes
-TODO,Print or download sales orders of this slot,Imprimer ou télécharger les commandes de ce créneau
-TODO,No orders,Pas de commandes
-TODO,Balance (Receivable),Solde (Dû)
-TODO,Balance (Payable),Solde (Avoir)
-TODO,Balance Amount,Régularisation
-TODO,Confirmation Email Sent,E-mail de Confirmation Envoyé
-TODO,HTML formatting accepted,Mise en forme HTML acceptée
-TODO,Excluded Group,Groupe Exclu
-TODO,Excluded Item,Article Exclu
+PICKUP,Pickup,Click and Collect
+PICKUP,Pickup Point,Point de Retrait
+PICKUP,Pickup Slot,Créneau de Retrait
+PICKUP,Pickup Date,Date de Retrait
+PICKUP,Preparation Time,Délai de Préparation
+PICKUP,Unit : hour. Only slots above order date + preparation time appears in cart.,Unité : heure. Seuls les créneaux postérieurs à la date de commande + délai de préparation apparaissent dans le panier.
+PICKUP,Automatic Slot Creation,Création de Créneau Automatique
+PICKUP,Rolling Day Period,Nombre de Jours Glissants
+PICKUP,Slots will be automatically created each night within a rolling day period.,Les créneaux seront créés automatiquement chaque nuit sur une période glissante.
+PICKUP,Automatically created,Créé automatiquement
+PICKUP,Point Name,Nom du Point
+PICKUP,Pickup Manager,Responsable du Click and Collect
+PICKUP,Pickup Address,Adresse du Point de Retrait
+PICKUP,Unique code to distinguish several pickup points,Code unique pour distinguer plusieurs points de retrait
+PICKUP,Pick a slot,Choisissez un créneau de retrait
+PICKUP,Export Sales Orders,Export des Commandes
+PICKUP,Print or download sales orders of this slot,Imprimer ou télécharger les commandes de ce créneau
+PICKUP,No orders,Pas de commandes
+PICKUP,Balance (Receivable),Solde (Dû)
+PICKUP,Balance (Payable),Solde (Avoir)
+PICKUP,Balance Amount,Régularisation
+PICKUP,Confirmation Email Sent,E-mail de Confirmation Envoyé
+PICKUP,HTML formatting accepted,Mise en forme HTML acceptée
+PICKUP,Excluded Group,Groupe Exclu
+PICKUP,Excluded Item,Article Exclu
+PICKUP,Special Order Item,Article sur Commande Spéciale

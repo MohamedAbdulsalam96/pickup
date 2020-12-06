@@ -24,9 +24,10 @@ def get_items_from_sales_order(customer, pickup_slot):
 		select SOI.item_code, sum(SOI.qty) as qty, SOI.rate, SOI.uom, SOI.conversion_factor
 		from `tabSales Order` SO
 		inner join `tabSales Order Item` SOI on SO.name = SOI.parent
+		inner join `tabItem` I on SOI.item_code = I.name
 		where SO.status in ('To Deliver and Bill', 'To Deliver') and SO.customer = %(customer)s and SO.pickup_slot = %(pickup_slot)s
-		group by SOI.item_code, SOI.rate, SOI.uom
-		order by SOI.idx""",
+		group by SOI.item_code, SOI.rate, SOI.uom, SOI.conversion_factor
+		order by I.special_order_item desc, SOI.item_code""",
 		{"customer": customer, "pickup_slot": pickup_slot}, as_dict=True)
 
 	# Close the order(s)

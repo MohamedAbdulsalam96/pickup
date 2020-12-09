@@ -1,0 +1,70 @@
+
+<!--First customer-->
+<h4>{%= __("Order Form") %}</h4>
+<h5>{%= report.raw_data.data_to_be_printed %}</h5>
+<h5>{%= data[0][__("Customer")] %}</h5>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>{%= __("Code") %}</th>
+			<th>{%= __("Quantity") %}</th>
+			<th>{%= __("Designation") %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="height: 30px;">{%= data[0][__("Code")] %}</td>
+			<td style="height: 30px;">{%= data[0][__("Quantity")] %}</td>
+			<td style="height: 30px;">{%= data[0][__("Designation")] %}</td>
+		</tr>
+
+
+{% for(var i=1, l=data.length; i<l; i++) { %}
+
+	{% if data[i][__("Customer")] != data[i-1][__("Customer")] %}
+	<!--New customer-->
+			<!--Add 10 empty lines-->
+			{% for(var j=0; j<10; j++) { %}
+				<tr>
+					<td style="height: 30px;"></td>
+					<td style="height: 30px;"></td>
+					<td style="height: 30px;"></td>
+				</tr>
+			{% } %}
+			</tbody>
+		</table>
+
+		<p style="page-break-after: always;">&nbsp;</p>
+		<p style="page-break-before: always;">&nbsp;</p>
+
+		<h4>{%= __("Order Form") %}</h4>
+		<h5>{%= report.raw_data.data_to_be_printed %}</h5>
+		<h5>{%= data[i][__("Customer")] %}</h5>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>{%= __("Code") %}</th>
+					<th>{%= __("Quantity") %}</th>
+					<th>{%= __("Designation") %}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="height: 30px;">{%= data[i][__("Code")] %}</td>
+					<td style="height: 30px;">{%= data[i][__("Quantity")] %}</td>
+					<td style="height: 30px;">{%= data[i][__("Designation")] %}</td>
+				</tr>
+	{% else %}
+	<!--Current customer-->
+		<tr>
+			<td>{%= data[i][__("Code")] %}</td>
+			<td>{%= data[i][__("Quantity")] %}</td>
+			<td>{%= data[i][__("Designation")] %}</td>
+		</tr>
+	{% endif %}
+
+{% } %}
+		</tbody>
+	</table>
+
+<p class="text-right text-muted">{{ __("Printed On") }} {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>

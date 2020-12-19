@@ -44,7 +44,7 @@ extend_website_page_controller_context = {"erpnext.templates.pages.cart":"pickup
 
 
 # Override ItemGroup context
-from pickup.custom_classes.item_group import item_group_override
+from pickup.pickup.custom_classes.item_group import item_group_override
 item_group_override()
 
 

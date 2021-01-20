@@ -43,7 +43,7 @@ def get_pickup_addresses(doctype=None, txt=None, filters=None, limit_start=0, li
 def set_pickup_slot(slot_name, cart_count):
 
 	# delete actual quotation because items depend on slot
-	if cart_count > 0:
+	if int(cart_count) > 0:
 		quotation = _get_cart_quotation()
 		quotation.delete()
 		frappe.local.cookie_manager.set_cookie("cart_count", 0)

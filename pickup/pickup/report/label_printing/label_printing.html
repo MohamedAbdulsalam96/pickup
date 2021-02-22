@@ -1,0 +1,24 @@
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+		{% for(var i=0, j=0, l=data.length; i<l-1; i++) { %}
+			<!-- 4 columns -->
+			{% if j == 4 %}
+				</tr>
+				<tr>
+				{% j = 0 %}
+    		{% endif %}
+			<td width="25%" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+				<b>{%= data[i][__("Item Name")] %}</b>
+				<div style="font-size:120%;font-weight: bold;">{%= data[i][__("Item Code")] %}</div>
+				<div align="right" style="font-size:200%;">{%= data[i][__("Price Sales UOM")] %} €</div>
+				<div align="right">{%= data[i][__("Price Stock UOM")] %} €/ {%= data[i][__("Stock UOM")] %}</div>
+			</td>
+			{% j = j+1 %}
+		{% } %}
+		</tr>
+	</tbody>
+</table>
+
+<p class="text-right text-muted">{{ __("Printed On") }} {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>

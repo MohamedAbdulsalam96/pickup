@@ -26,3 +26,9 @@ PICKUP,Excluded Item,Article Exclu
 PICKUP,Special Order Item,Article sur Commande Spéciale
 PICKUP,Order Form,Feuille de Commande
 PICKUP,Slots,Créneaux
+PICKUP,Label Printing,Impression des Etiquettes
+PICKUP,Print Label,Imprimer Etiquette
+PICKUP,Price Sales UOM,Prix en UDM de Vente
+PICKUP,Price Stock UOM,Prix en UDM du Stock
+PICKUP,Item Created Since,Article Créé depuis
+PICKUP,Item Price Updated Since,Prix de l'Article Mis à Jour depuis

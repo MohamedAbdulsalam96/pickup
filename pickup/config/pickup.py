@@ -28,6 +28,11 @@ def get_data():
 					"is_query_report": True,
 					"name": "Order Form"
 				},
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Label Printing"
+				}
 			]
 		},
 		{

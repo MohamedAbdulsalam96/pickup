@@ -27,14 +27,14 @@ frappe.query_reports["Label Printing"] = {
         },
         {
             "fieldname":"item_creation_date",
-            "label": __("Item Created Since"),
+            "label": "Article Créé depuis",
             "fieldtype": "Date",
             "options": "",
             "reqd": 0
         },
         {
             "fieldname":"item_price_date",
-            "label": __("Item Price Updated Since"),
+            "label": "Prix Mis à Jour depuis",
             "fieldtype": "Date",
             "options": "",
             "reqd": 0

@@ -12,8 +12,8 @@
 			<td width="25%" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
 				<b>{%= data[i][__("Item Name")] %}</b>
 				<div style="font-size:120%;font-weight: bold;">{%= data[i][__("Item Code")] %}</div>
-				<div align="right" style="font-size:200%;">{%= data[i][__("Price Sales UOM")] %} €</div>
-				<div align="right">{%= data[i][__("Price Stock UOM")] %} €/ {%= data[i][__("Stock UOM")] %}</div>
+				<div align="right" style="font-size:200%;">{%= data[i]["Prix en UDM de Vente"] %} €</div>
+				<div align="right">{%= data[i]["Prix en UDM du Stock"] %} €/ {%= data[i]["UDM du Stock"] %}</div>
 			</td>
 			{% j = j+1 %}
 		{% } %}

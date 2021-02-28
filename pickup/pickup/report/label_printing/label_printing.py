@@ -31,7 +31,7 @@ def get_items(item_group, item_code, item_creation_date, item_price_date):
 	if item_group:
 		child_groups = ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(item_group)])
 	else:
-		child_groups = ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups(_("Produits"))])
+		child_groups = ", ".join(['"' + frappe.db.escape(i[0]) + '"' for i in get_child_groups("Produits")])
 
 	items = frappe.db.sql("""
 			select I.item_code, I.item_name, 

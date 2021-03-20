@@ -9,11 +9,11 @@
 				<tr>
 				{% j = 0 %}
     		{% endif %}
-			<td width="25%" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
-				<b>{%= data[i][__("Item Name")] %}</b>
+			<td width="25%">
+				<div style="line-height: 1em; height: 2em; overflow: hidden;"><b>{%= data[i][__("Item Name")] %}</b></div>
 				<div style="font-size:120%;font-weight: bold;">{%= data[i][__("Item Code")] %}</div>
-				<div align="right" style="font-size:200%;">{%= data[i]["Prix en UDM de Vente"] %} €</div>
-				<div align="right">{%= data[i]["Prix en UDM du Stock"] %} €/ {%= data[i]["UDM du Stock"] %}</div>
+				<div align="right" style="font-size:200%; line-height: 1em">{%= data[i]["Price Sales UOM"] %} €</div>
+				<div align="right">{%= data[i]["Price Stock UOM"] %} €/ {%= data[i]["Stock UOM"] %}</div>
 			</td>
 			{% j = j+1 %}
 		{% } %}

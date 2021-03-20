@@ -19,9 +19,9 @@ def get_columns(filters):
 	columns = [
 		_("Item Code") + "::100",
 		_("Item Name") + "::250",
-		_("Price Sales UOM") + "::100",
-		_("Price Stock UOM") + "::100",
-		_("Stock UOM") + "::100"
+		"Price Sales UOM" + "::100",
+		"Price Stock UOM" + "::100",
+		"Stock UOM" + "::100"
 	]
 
 	return columns
